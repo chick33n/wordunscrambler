@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/source/index.css">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #262626;
+}
+
+#floatingbubbles {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: aliceblue;
+}
+
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+   
+}
+#submitter{
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+}
+#letterInput{
+    width: 130px;
+    height: 35px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+}
+#letterInputLabel{
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+}
+.signature{
+    position: absolute;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+    color: aliceblue;
+}
+
+#spotify{
+    position: absolute;
+    font-family: 'Outfit', sans-serif;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+    color: aliceblue;
+}
+
+</style>
+<body>
+
+
+<div id="container" class="container">
+
+        <canvas id="floatingbubbles"></canvas>
+
+    <div class="form" id="form">
+        <form action="/" method="post" class="lettergetter">
+    
+            <label for="letterInput" class="label" id="letterInputLabel">Enter Letters:</label>
+            <input type="text" name="letters" id="letterInput">
+            <button id="submitter">Submit</button>
+    
+        </form>
+    </div>
+
+    <p id="signature" class="signature">Brought to you by Augustine :/</p>
+
+</div>
+
+
+
+
+
+    <script> 
+
+    class bubble {
+  constructor(canvasWidth, canvasHeight) {
+    this.maxHeight = canvasHeight;
+    this.maxWidth = canvasWidth;
+    this.randomise();
+  }
+
+  generateDecimalBetween(min, max) {
+    return (Math.random() * (min - max) + max).toFixed(2);
+  }
+
+  update() {
+    this.posX = this.posX - this.movementX;
+    this.posY = this.posY - this.movementY;
+
+    if (this.posY < 0 || this.posX < 0 || this.posX > this.maxWidth) {
+      this.randomise();
+      this.posY = this.maxHeight;
+    }
+  }
+
+  randomise() {
+    this.colour = Math.random() * 255;
+    this.size = this.generateDecimalBetween(2, 6);
+    this.movementX = this.generateDecimalBetween(-0.4, 0.4);
+    this.movementY = this.generateDecimalBetween(0.7, 2);
+    this.posX = this.generateDecimalBetween(0, this.maxWidth);
+    this.posY = this.generateDecimalBetween(0, this.maxHeight);
+  }
+}
+
+class background {
+  constructor() {
+    this.canvas = document.getElementById("floatingbubbles");
+    this.ctx = this.canvas.getContext("2d");
+    this.canvas.height = window.innerHeight;
+    this.canvas.width = window.innerWidth;
+    this.bubblesList = [];
+    this.generateBubbles();
+    this.animate();
+  }
+
+  animate() {
+    let self = this;
+    self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+    self.bubblesList.forEach(function(bubble) {
+      bubble.update();
+      self.ctx.beginPath();
+      self.ctx.arc(bubble.posX, bubble.posY, bubble.size, 0, 2 * Math.PI);
+      self.ctx.fillStyle = "hsl(" + bubble.colour + ", 40%, 39%)";
+      self.ctx.fill();
+      self.ctx.strokeStyle = "hsl(" + bubble.colour + ", 40%, 39%)";
+      self.ctx.stroke();
+    });
+
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  addBubble(bubble) {
+    return this.bubblesList.push(bubble);
+  }
+
+  generateBubbles() {
+    let self = this;
+    for (let i = 0; i < self.bubbleDensity(); i++) {
+      self.addBubble(new bubble(self.canvas.width, self.canvas.height));
+    }
+  }
+
+  bubbleDensity() {
+    return Math.sqrt((this.canvas.height, this.canvas.width) * 5);
+  }
+}
+
+window.onload = function() {
+  new background();
+};
+
+window.requestAnimFrame = (function() {
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    }
+  );
+})();
+
+    </script>
+
+</body>
+</html>
