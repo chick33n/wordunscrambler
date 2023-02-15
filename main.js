@@ -31,9 +31,9 @@ app.get('/', async (req, res) => {
   res.render('index.ejs')
 })
 
-app.post('/', (req, res) => {
+app.get('/answers', (req, res) => {
 
-  var allletters = req.body.letters;
+  var allletters = req.params.letters;
   var letters = [];
   for(i = 0; i < 6 ; i++){
     letters[i] = allletters[i];
