@@ -33,7 +33,7 @@ app.get('/', async (req, res) => {
 
 app.get('/answers', (req, res) => {
 
-  var allletters = req.params.letters;
+  var allletters = req.query.letters;
   var letters = [];
   for(i = 0; i < 6 ; i++){
     letters[i] = allletters[i];
