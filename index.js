@@ -75,3 +75,5 @@ const port = 8080;
 app.listen(process.env.PORT || port, ()=>{
     console.log(`Listining at http://localhost:${port}`);
 });
+
+module.exports = app
