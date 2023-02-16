@@ -14,6 +14,12 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 var list; 
 
+var music1 = requrire('music1.mp3')
+var music2 = requrire('music2.mp3')
+var music3 = requrire('music3.mp3')
+var music4 = requrire('music4.mp3')
+
+
 async function getList(){
   try {
       const content = await fs.readFile('./wordlist.txt',  'utf-8')
@@ -64,7 +70,7 @@ generateWords(letters, '')
   })
 
   //console.log(goodWords)
-  res.render('answers.ejs',{goodWords:goodWords})
+  res.render('answers.ejs',{goodWords:goodWords, music1:music1,music2:music2,music3:music3,music4:music4})
 })
 
 

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="/source/index.css">
 </head>
 
 <style>
@@ -79,6 +78,27 @@ body {
 </style>
 <body>
 
+
+  <%  let number = Math.floor(Math.random() * 4 ) + 1%>
+    <% if(number == 1){ console.log(1) %>
+      <audio  autoplay>
+        <source src="/music/music1.mp3" type="audio/mpeg" />
+      </audio> <%} %>
+
+    <%  if(number == 2){ console.log(2) %>
+      <audio   autoplay>
+        <source src="/music/music2.mp3" type="audio/mpeg" />
+      </audio> <%} %>
+
+    <%  if(number == 3){ console.log(3) %>
+      <audio  autoplay>
+        <source src="/music/music3.mp3" type="audio/mpeg" />
+      </audio> <%} %>
+
+    <%  if(number == 4){ console.log(4) %>
+      <audio  autoplay>
+        <source src="/music/music4.mp3" type="audio/mpeg" />
+      </audio> <%} %>
 
 <div id="container" class="container">
 
