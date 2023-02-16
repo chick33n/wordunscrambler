@@ -31,7 +31,7 @@ app.get('/', async (req, res) => {
   res.render('index.ejs')
 })
 
-app.get('/answers', (req, res) => {
+app.get('/answers:letters', (req, res) => {
 
   var allletters = req.query.letters;
   var letters = [];
@@ -69,7 +69,7 @@ generateWords(letters, '')
 
 
 
-app.use(express.static("public"));
+app.use(express.static("public"))
 
 const port = 8080;
 app.listen(process.env.PORT || port, ()=>{
