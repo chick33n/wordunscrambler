@@ -1,11 +1,9 @@
 const {promises: fs} = require("fs");
-const { get } = require("http");
-const { userInfo } = require("os");
 const path = require('path')
-const { getHeapSnapshot } = require("v8");
 const express = require('express')
 const app = express();
 const bodyParser = require ('body-parser');
+process.env.PWD = process.cwd()
 
 
 app.set('views', path.join(__dirname, 'views'))
@@ -69,8 +67,7 @@ generateWords(letters, '')
 })
 
 
-
-app.use(express.static("public"))
+app.use(express.static(process.env.PWD + '/htdocs'));
 
 const port = 8080;
 app.listen(process.env.PORT || port, ()=>{
