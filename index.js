@@ -14,11 +14,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 var list; 
 
-var music1 = requrire('music1.mp3')
-var music2 = requrire('music2.mp3')
-var music3 = requrire('music3.mp3')
-var music4 = requrire('music4.mp3')
-
 
 async function getList(){
   try {
@@ -37,7 +32,7 @@ app.get('/', async (req, res) => {
   res.render('index.ejs')
 })
 
-app.get('/answers:letters', (req, res) => {
+app.get('/answers', (req, res) => {
 
   var allletters = req.query.letters;
   var letters = [];
@@ -70,7 +65,7 @@ generateWords(letters, '')
   })
 
   //console.log(goodWords)
-  res.render('answers.ejs',{goodWords:goodWords, music1:music1,music2:music2,music3:music3,music4:music4})
+  res.render('answers.ejs',{goodWords:goodWords})
 })
 
 
