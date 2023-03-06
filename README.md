@@ -3,3 +3,5 @@ Takes 6 letters and generates a list of all possible words found in an extensive
 Created for playing Anagrams with friends 
 
 All code by Augustine O.
+
+The final result can be found [here](http://chicken.cyclic.app/)
